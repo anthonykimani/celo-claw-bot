@@ -21,13 +21,13 @@ export const envValidationSchema = Joi.object({
 
   POLYMARKET_CLOB_API_URL: Joi.string().uri().default('https://clob.polymarket.com'),
   POLYMARKET_GAMMA_API_URL: Joi.string().uri().default('https://gamma-api.polymarket.com'),
-  POLYMARKET_WALLET_PRIVATE_KEY: Joi.string().optional(),
-  POLYMARKET_FUNDER_ADDRESS: Joi.string().optional(),
+  POLYMARKET_WALLET_PRIVATE_KEY: Joi.string().optional().allow(''),
+  POLYMARKET_FUNDER_ADDRESS: Joi.string().optional().allow(''),
   POLYMARKET_SIGNATURE_TYPE: Joi.number().default(1),
   POLYMARKET_CHAIN_ID: Joi.number().default(137),
   POLYMARKET_ENABLE_REAL_TRADING: Joi.string().valid('true', 'false').default('false'),
-  POLYMARKET_RPC_URL: Joi.string().uri().optional(),
-  POLYMARKET_USDC_ADDRESS: Joi.string().optional(),
+  POLYMARKET_RPC_URL: Joi.string().uri().optional().allow(''),
+  POLYMARKET_USDC_ADDRESS: Joi.string().optional().allow(''),
   POLYMARKET_CLOB_WEBSOCKET_URL: Joi.string().uri().default('wss://ws-subscriptions-clob.polymarket.com'),
   POLYMARKET_WEBSOCKET_ENABLED: Joi.string().valid('true', 'false').default('true'),
   POLYMARKET_WEBSOCKET_RECONNECT_DELAY: Joi.number().default(5000),
@@ -39,11 +39,11 @@ export const envValidationSchema = Joi.object({
   CORS_ORIGINS: Joi.string().optional(),
 
   // Celo (reserve + ERC-8004)
-  CELO_RPC_URL: Joi.string().uri().optional(),
-  CELO_SERVER_PRIVATE_KEY: Joi.string().optional(),
-  CELO_CUSD_TOKEN_ADDRESS: Joi.string().optional(),
-  CELO_RESERVE_ADDRESS: Joi.string().optional(),
-  CELO_ERC8004_REGISTRY_ADDRESS: Joi.string().optional(),
+  CELO_RPC_URL: Joi.string().uri().optional().allow(''),
+  CELO_SERVER_PRIVATE_KEY: Joi.string().optional().allow(''),
+  CELO_CUSD_TOKEN_ADDRESS: Joi.string().optional().allow(''),
+  CELO_RESERVE_ADDRESS: Joi.string().optional().allow(''),
+  CELO_ERC8004_REGISTRY_ADDRESS: Joi.string().optional().allow(''),
 
   DEFAULT_PROVIDER: Joi.string().default('polymarket'),
 });

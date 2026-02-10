@@ -5,3 +5,4 @@ dist/
 web/.pnpm-store/
 backend/node_modules/
 backend/dist/
+backend/swagger.json
