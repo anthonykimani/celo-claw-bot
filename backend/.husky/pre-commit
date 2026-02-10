@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+./scripts/sync-env-example.sh || exit 1
+
+pnpm lint || exit 1
+
+pnpm format
+
+git add -A

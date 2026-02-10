@@ -1,0 +1,69 @@
+import type { AppConfig } from '../types';
+
+export default (): AppConfig => ({
+  port: parseInt(process.env.PORT ?? '3000', 10),
+  defaultProvider: process.env.DEFAULT_PROVIDER ?? 'polymarket',
+  database: {
+    host: process.env.DATABASE_HOST ?? 'localhost',
+    port: parseInt(process.env.DATABASE_PORT ?? '5432', 10),
+    username: process.env.DATABASE_USERNAME ?? 'postgres',
+    password: process.env.DATABASE_PASSWORD ?? 'postgres',
+    database: process.env.DATABASE_NAME ?? 'polymarket_trader',
+    ssl: process.env.DATABASE_SSL === 'true',
+    sslMode: process.env.PGSSLMODE,
+    channelBinding: process.env.PGCHANNELBINDING,
+  },
+  redis: {
+    host: process.env.REDIS_HOST ?? 'localhost',
+    port: parseInt(process.env.REDIS_PORT ?? '6379', 10),
+    username: process.env.REDIS_USERNAME,
+    password: process.env.REDIS_PASSWORD,
+    tls: process.env.REDIS_TLS === 'true',
+  },
+  polymarket: {
+    clobApiUrl: process.env.POLYMARKET_CLOB_API_URL ?? 'https://clob.polymarket.com',
+    gammaApiUrl: process.env.POLYMARKET_GAMMA_API_URL ?? 'https://gamma-api.polymarket.com',
+    walletPrivateKey: process.env.POLYMARKET_WALLET_PRIVATE_KEY,
+    funderAddress: process.env.POLYMARKET_FUNDER_ADDRESS,
+    signatureType: process.env.POLYMARKET_SIGNATURE_TYPE ? parseInt(process.env.POLYMARKET_SIGNATURE_TYPE, 10) : 1,
+    chainId: process.env.POLYMARKET_CHAIN_ID ? parseInt(process.env.POLYMARKET_CHAIN_ID, 10) : 137,
+    enableRealTrading: process.env.POLYMARKET_ENABLE_REAL_TRADING === 'true',
+    rpcUrl: process.env.POLYMARKET_RPC_URL,
+    usdcAddress: process.env.POLYMARKET_USDC_ADDRESS,
+    clobWebSocketUrl: process.env.POLYMARKET_CLOB_WEBSOCKET_URL ?? 'wss://ws-subscriptions-clob.polymarket.com',
+    websocketEnabled: process.env.POLYMARKET_WEBSOCKET_ENABLED !== 'false',
+    websocketReconnectDelay: parseInt(process.env.POLYMARKET_WEBSOCKET_RECONNECT_DELAY ?? '5000', 10),
+    websocketCustomFeaturesEnabled: process.env.POLYMARKET_WEBSOCKET_CUSTOM_FEATURES === 'true',
+  },
+  celo: {
+    rpcUrl: process.env.CELO_RPC_URL,
+    serverPrivateKey: process.env.CELO_SERVER_PRIVATE_KEY,
+    cusdTokenAddress: process.env.CELO_CUSD_TOKEN_ADDRESS,
+    reserveAddress: process.env.CELO_RESERVE_ADDRESS,
+    erc8004RegistryAddress: process.env.CELO_ERC8004_REGISTRY_ADDRESS,
+  },
+  scheduler: {
+    syncCron: process.env.SYNC_CRON_EXPRESSION ?? '*/15 * * * *',
+    priceUpdateCron: process.env.PRICE_UPDATE_CRON_EXPRESSION ?? '*/5 * * * *',
+  },
+  cors: {
+    origins: (() => {
+      const defaultOrigins = [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'http://127.0.0.1:3000',
+        'http://127.0.0.1:3001',
+        'https://polymart-trader-client.brimble.app',
+        'https://polymart-trade.xyz',
+      ];
+      if (process.env.CORS_ORIGINS) {
+        const envOrigins = process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim());
+        return [...new Set([...defaultOrigins, ...envOrigins])];
+      }
+      return defaultOrigins;
+    })(),
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-idempotency-key'],
+    credentials: true,
+  },
+});
