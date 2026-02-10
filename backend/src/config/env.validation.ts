@@ -29,6 +29,11 @@ export const envValidationSchema = Joi.object({
   POLYMARKET_RPC_URL: Joi.string().uri().optional().allow(''),
   POLYMARKET_USDC_ADDRESS: Joi.string().optional().allow(''),
   POLYMARKET_CLOB_WEBSOCKET_URL: Joi.string().uri().default('wss://ws-subscriptions-clob.polymarket.com'),
+
+  // Optional: provide CLOB API key creds directly (otherwise derived from wallet)
+  POLYMARKET_CLOB_API_KEY: Joi.string().optional().allow(''),
+  POLYMARKET_CLOB_API_SECRET: Joi.string().optional().allow(''),
+  POLYMARKET_CLOB_API_PASSPHRASE: Joi.string().optional().allow(''),
   POLYMARKET_WEBSOCKET_ENABLED: Joi.string().valid('true', 'false').default('true'),
   POLYMARKET_WEBSOCKET_RECONNECT_DELAY: Joi.number().default(5000),
   POLYMARKET_WEBSOCKET_CUSTOM_FEATURES: Joi.string().valid('true', 'false').default('false'),

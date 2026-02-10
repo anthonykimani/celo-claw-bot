@@ -34,6 +34,10 @@ export default (): AppConfig => ({
     websocketEnabled: process.env.POLYMARKET_WEBSOCKET_ENABLED !== 'false',
     websocketReconnectDelay: parseInt(process.env.POLYMARKET_WEBSOCKET_RECONNECT_DELAY ?? '5000', 10),
     websocketCustomFeaturesEnabled: process.env.POLYMARKET_WEBSOCKET_CUSTOM_FEATURES === 'true',
+
+    clobApiKey: process.env.POLYMARKET_CLOB_API_KEY,
+    clobApiSecret: process.env.POLYMARKET_CLOB_API_SECRET,
+    clobApiPassphrase: process.env.POLYMARKET_CLOB_API_PASSPHRASE,
   },
   celo: {
     rpcUrl: process.env.CELO_RPC_URL,

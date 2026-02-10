@@ -179,26 +179,43 @@ export class PolymarketClobService {
 
     const checksummedFunderAddress = getAddress(funderAddress);
 
-    const tempClient = new ClobClient(host, chainId, wallet);
+    const envApiKey = this.configService.get<string>('polymarket.clobApiKey');
+    const envApiSecret = this.configService.get<string>('polymarket.clobApiSecret');
+    const envApiPassphrase = this.configService.get<string>('polymarket.clobApiPassphrase');
 
     let creds: ApiKeyCreds;
-    try {
-      creds = await tempClient.createOrDeriveApiKey();
-      this.logger.log('API key created/derived successfully');
-    } catch (error) {
-      const errorMessage = (error as Error).message;
-      this.logger.error(`Failed to create or derive API key: ${errorMessage}`);
 
-      if (errorMessage.includes('signature') || errorMessage.includes('Could not create api key')) {
-        throw new Error(`Failed to authenticate with Polymarket: ${errorMessage}. ` + `Please verify that POLYMARKET_WALLET_PRIVATE_KEY is correct and the wallet has sufficient MATIC for gas fees.`);
+    if (envApiKey && envApiSecret && envApiPassphrase) {
+      creds = {
+        key: envApiKey,
+        secret: envApiSecret,
+        passphrase: envApiPassphrase,
+      } as unknown as ApiKeyCreds;
+      this.logger.log('Using CLOB API key creds from env (POLYMARKET_CLOB_API_*)');
+    } else {
+      const tempClient = new ClobClient(host, chainId, wallet);
+
+      try {
+        creds = await tempClient.createOrDeriveApiKey();
+        this.logger.log('API key created/derived successfully');
+      } catch (error) {
+        const errorMessage = (error as Error).message;
+        this.logger.error(`Failed to create or derive API key: ${errorMessage}`);
+
+        if (errorMessage.includes('signature') || errorMessage.includes('Could not create api key')) {
+          throw new Error(
+            `Failed to authenticate with Polymarket: ${errorMessage}. ` +
+              `Please verify that POLYMARKET_WALLET_PRIVATE_KEY is correct and the wallet has sufficient MATIC for gas fees.`,
+          );
+        }
+
+        throw new Error(`Failed to create API key for CLOB authentication: ${errorMessage}`);
       }
 
-      throw new Error(`Failed to create API key for CLOB authentication: ${errorMessage}`);
-    }
-
-    if (!creds) {
-      this.logger.error('No API credentials received from createOrDeriveApiKey');
-      throw new Error('Failed to obtain API credentials from Polymarket');
+      if (!creds) {
+        this.logger.error('No API credentials received from createOrDeriveApiKey');
+        throw new Error('Failed to obtain API credentials from Polymarket');
+      }
     }
 
     this.authenticatedClient = new ClobClient(host, chainId, wallet, creds, signatureType, checksummedFunderAddress);

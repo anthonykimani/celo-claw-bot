@@ -31,6 +31,11 @@ export type PolymarketConfig = {
   websocketEnabled?: boolean;
   websocketReconnectDelay?: number;
   websocketCustomFeaturesEnabled?: boolean;
+
+  // Optional: provide CLOB API key creds directly (otherwise derived from wallet)
+  clobApiKey?: string;
+  clobApiSecret?: string;
+  clobApiPassphrase?: string;
 };
 
 export type SchedulerConfig = {
