@@ -15,4 +15,16 @@ export class ReserveEventRepository extends Repository<ReserveEvent> {
       .getRawOne<{ sum: string }>();
     return res?.sum ?? '0';
   }
+
+  async listByAgent(agentId: string, limit = 50, offset = 0) {
+    const [rows, total] = await this.findAndCount({
+      where: { agentId },
+      order: { createdAt: 'DESC' },
+      take: limit,
+      skip: offset,
+    });
+
+    return { rows, total };
+  }
 }
+
