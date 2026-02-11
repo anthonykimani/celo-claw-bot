@@ -103,3 +103,96 @@ export interface SyncResponse {
   message: string;
 }
 
+export interface AgentTokenSummary {
+  address: string | null;
+  symbol: string;
+  priceUsd: number | null;
+  priceChange24h: number | null;
+  marketCap: number | null;
+  volume24h: number | null;
+}
+
+export interface AgentPublic {
+  id: string;
+  name: string;
+  imageUrl: string | null;
+  twitterHandle: string | null;
+  strategy: string;
+  personality: string | null;
+  tradingEnabled: 0 | 1;
+  balance: number;
+  totalPnL: number;
+  totalTrades: number;
+  winningTrades: number;
+  winRate: number;
+  token: AgentTokenSummary;
+  createdAt: number;
+}
+
+export interface AgentsListResponse {
+  success: boolean;
+  data: AgentPublic[];
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+    hasMore: boolean;
+  };
+}
+
+export interface CreateAgentDto {
+  name: string;
+  strategyType?: string;
+  riskLevel?: 'low' | 'medium' | 'high';
+  personality?: string;
+  tradingEnabled?: boolean;
+  reserveAddress?: string;
+}
+
+export interface Agent {
+  id: string;
+  name: string;
+  strategyType: string;
+  riskLevel: 'low' | 'medium' | 'high';
+  personality: string | null;
+  tradingEnabled: boolean;
+  lastTradingBalanceUsdc: string;
+  totalPnlUsdc: string;
+  totalTrades: number;
+  winningTrades: number;
+  winRate: string;
+  reserveAddress: string | null;
+  erc8004AgentId: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateAgentResponse {
+  success: boolean;
+  data: Agent;
+}
+
+export interface AgentResponse {
+  success: boolean;
+  data: Agent;
+}
+
+export interface ReserveEvent {
+  id: number;
+  agentId: string;
+  amountCusd: number;
+  txHash: string | null;
+  note: string | null;
+  createdAt: number;
+}
+
+export interface ReserveEventsResponse {
+  success: boolean;
+  data: ReserveEvent[];
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+    hasMore: boolean;
+  };
+}

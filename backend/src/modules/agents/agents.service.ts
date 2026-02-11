@@ -18,12 +18,6 @@ export class AgentsService {
   ) {}
 
   async create(dto: CreateAgentDto): Promise<Agent> {
-    // Hackathon constraint: single agent. If one exists, reject.
-    const existing = await this.agentRepo.find();
-    if (existing.length > 0) {
-      throw new BadRequestException('An agent already exists for this deployment');
-    }
-
     const agent = this.agentRepo.create({
       name: dto.name,
       strategyType: dto.strategyType ?? 'crypto',

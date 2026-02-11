@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
+import { BullModule } from '@nestjs/bullmq';
 import configuration from '@config/configuration';
 import { CommonModule } from '@common/common.module';
 import { DatabaseModule } from '@database/database.module';
@@ -28,6 +29,24 @@ import { SchedulerModule } from './scheduler/scheduler.module';
         entities: [__dirname + '/database/entities/*.entity{.ts,.js}'],
         synchronize: false,
         logging: process.env.NODE_ENV === 'development',
+      }),
+    }),
+
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        connection: {
+          host: configService.get<string>('redis.host'),
+          port: configService.get<number>('redis.port'),
+          ...(configService.get<string>('redis.username') && {
+            username: configService.get<string>('redis.username'),
+          }),
+          ...(configService.get<string>('redis.password') && {
+            password: configService.get<string>('redis.password'),
+          }),
+          ...(configService.get<boolean>('redis.tls') && { tls: {} }),
+        },
       }),
     }),
 

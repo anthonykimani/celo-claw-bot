@@ -8,6 +8,8 @@ import { MarketDetail } from '@/components/markets/market-detail';
 import { OrdersList } from '@/components/orders/orders-list';
 import { OrderDetail } from '@/components/orders/order-detail';
 import { CreateOrderForm } from '@/components/orders/create-order-form';
+import { AgentsList } from '@/components/agents/agents-list';
+import { AgentDetail } from '@/components/agents/agent-detail';
 import { useUIStore } from '@/lib/store/ui-store';
 import { WalletConnectButton } from '@/lib/wallet/wallet-connect';
 
@@ -18,9 +20,11 @@ export default function Home() {
     selectedEventId,
     selectedMarketId,
     selectedOrderId,
+    selectedAgentId,
     setSelectedEventId,
     setSelectedMarketId,
     setSelectedOrderId,
+    setSelectedAgentId,
   } = useUIStore();
 
   const handleTabChange = (value: string) => {
@@ -32,12 +36,15 @@ export default function Home() {
       setSelectedEventId(null);
     } else if (newTab === 'orders') {
       setSelectedOrderId(null);
+    } else if (newTab === 'agents') {
+      setSelectedAgentId(null);
     }
     
     if (newTab !== activeTab) {
       setSelectedMarketId(null);
       setSelectedEventId(null);
       setSelectedOrderId(null);
+      setSelectedAgentId(null);
     }
     
     setActiveTab(newTab);
@@ -59,7 +66,7 @@ export default function Home() {
         </div>
 
         <Tabs value={activeTab} onValueChange={handleTabChange}>
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger 
               value="markets"
               onClick={() => {
@@ -90,6 +97,7 @@ export default function Home() {
             >
               Orders
             </TabsTrigger>
+            <TabsTrigger value="agents">Agents</TabsTrigger>
           </TabsList>
 
           <TabsContent value="markets" className="mt-6">
@@ -114,6 +122,10 @@ export default function Home() {
             ) : (
               <OrdersList />
             )}
+          </TabsContent>
+
+          <TabsContent value="agents" className="mt-6">
+            {selectedAgentId ? <AgentDetail /> : <AgentsList />}
           </TabsContent>
         </Tabs>
 

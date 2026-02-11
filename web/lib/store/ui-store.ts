@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-type Tab = 'events' | 'markets' | 'orders';
+type Tab = 'events' | 'markets' | 'orders' | 'agents';
 
 interface CreateOrderPrefill {
   marketId?: number;
@@ -38,6 +38,7 @@ interface UIState {
   selectedEventId: number | null;
   selectedMarketId: number | null;
   selectedOrderId: number | null;
+  selectedAgentId: string | null;
   isCreateOrderDialogOpen: boolean;
   createOrderPrefill: CreateOrderPrefill | null;
   eventsPage: number;
@@ -50,6 +51,7 @@ interface UIState {
   setSelectedEventId: (id: number | null) => void;
   setSelectedMarketId: (id: number | null) => void;
   setSelectedOrderId: (id: number | null) => void;
+  setSelectedAgentId: (id: string | null) => void;
   setCreateOrderDialogOpen: (open: boolean, prefill?: CreateOrderPrefill | null) => void;
   setEventsPage: (page: number) => void;
   setMarketsPage: (page: number) => void;
@@ -66,6 +68,7 @@ export const useUIStore = create<UIState>()(
       selectedEventId: null,
       selectedMarketId: null,
       selectedOrderId: null,
+      selectedAgentId: null,
       isCreateOrderDialogOpen: false,
       createOrderPrefill: null,
       eventsPage: 1,
@@ -96,6 +99,7 @@ export const useUIStore = create<UIState>()(
       setSelectedEventId: (id) => set({ selectedEventId: id }),
       setSelectedMarketId: (id) => set({ selectedMarketId: id }),
       setSelectedOrderId: (id) => set({ selectedOrderId: id }),
+      setSelectedAgentId: (id) => set({ selectedAgentId: id }),
       setCreateOrderDialogOpen: (open, prefill = null) => 
         set({ 
           isCreateOrderDialogOpen: open,
@@ -121,4 +125,3 @@ export const useUIStore = create<UIState>()(
     }
   )
 );
-
