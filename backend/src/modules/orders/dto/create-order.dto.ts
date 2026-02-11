@@ -59,6 +59,13 @@ export class CreateOrderDto {
   @Min(1)
   marketId: number;
 
+  @ApiPropertyOptional({
+    description: 'Optional agent ID (used for bot attribution)',
+    example: '550e8400-e29b-41d4-a716-446655440000',
+  })
+  @IsOptional()
+  agentId?: string;
+
   @ApiProperty({
     description: 'Order side - BUY or SELL',
     enum: OrderSideValues,

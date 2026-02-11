@@ -344,8 +344,15 @@ export class PolymarketWebSocketService implements OnModuleInit, OnModuleDestroy
     if (this.ws) {
       this.logger.log('Closing WebSocket connection');
       this.ws.removeAllListeners();
-      if (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING) {
-        this.ws.close();
+      try {
+        if (this.ws.readyState === WebSocket.OPEN) {
+          this.ws.close();
+        } else if (this.ws.readyState === WebSocket.CONNECTING) {
+          // During CONNECTING, ws.close()/terminate can throw "closed before established".
+          // We just drop the reference after removing listeners.
+        }
+      } catch {
+        // ignore shutdown errors
       }
       this.ws = null;
     }

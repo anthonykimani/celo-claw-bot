@@ -14,6 +14,7 @@ export class OrderFactory {
 
     return {
       idempotencyKey,
+      agentId: (dto as any).agentId ?? null,
       marketId: dto.marketId,
       side: dto.side,
       type: dto.type,

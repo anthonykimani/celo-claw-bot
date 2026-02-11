@@ -29,6 +29,9 @@ export class Agent {
   @Column({ name: 'trading_enabled', type: 'boolean', default: true })
   tradingEnabled: boolean;
 
+  @Column({ name: 'strategy_params', type: 'jsonb', nullable: true })
+  strategyParams: Record<string, unknown> | null;
+
   // Snapshot of the Polymarket funder/trading wallet USDC balance, used for net-balance accounting.
   @Column({
     name: 'last_trading_balance_usdc',

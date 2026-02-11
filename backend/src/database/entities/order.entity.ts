@@ -41,6 +41,10 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ name: 'agent_id', type: 'uuid', nullable: true })
+  @Index('idx_orders_agent_id')
+  agentId: string | null;
+
   @Column({ name: 'idempotency_key' })
   @Index('idx_orders_idempotency_key')
   idempotencyKey: string;
