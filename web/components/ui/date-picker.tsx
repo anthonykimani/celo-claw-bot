@@ -38,10 +38,10 @@ export function DatePicker({ date, onDateChange, placeholder = "Pick a date", cl
             --rdp-accent-color: hsl(var(--foreground));
             --rdp-background-color: hsl(var(--background));
             margin: 0;
-            font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+             font-family: var(--font-body), "Space Grotesk", sans-serif;
           }
           .rdp-button_reset {
-            font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+             font-family: var(--font-body), "Space Grotesk", sans-serif;
           }
           .rdp-month {
             margin: 0;
@@ -82,19 +82,19 @@ export function DatePicker({ date, onDateChange, placeholder = "Pick a date", cl
             width: 100%;
             height: 100%;
             font-size: 0.875rem;
-            border-radius: 0 !important;
+             border-radius: 999px !important;
             cursor: pointer;
             transition: background-color 0.2s;
           }
           .rdp-button_previous,
           .rdp-button_next {
-            border-radius: 0 !important;
+             border-radius: 999px !important;
           }
           .rdp-month {
-            border-radius: 0 !important;
+             border-radius: 16px !important;
           }
           .rdp-day_button:hover:not([disabled]) {
-            background-color: hsl(var(--accent));
+             background-color: hsl(var(--accent));
           }
           .rdp-day_selected {
             background-color: hsl(var(--foreground));
@@ -136,4 +136,3 @@ export function DatePicker({ date, onDateChange, placeholder = "Pick a date", cl
     </Popover>
   )
 }
-

@@ -56,7 +56,7 @@ export function AgentsList() {
 
   return (
     <div className="space-y-6">
-      <Card className="rounded-none">
+      <Card className="rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg">Create Agent</CardTitle>
         </CardHeader>
@@ -68,13 +68,14 @@ export function AgentsList() {
                 placeholder="Agent name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                className="bg-[#f4f6fb]"
               />
             </div>
 
             <div className="space-y-2">
               <Label>Strategy</Label>
               <Select value={strategyType} onValueChange={setStrategyType}>
-                <SelectTrigger className="cursor-pointer">
+                <SelectTrigger className="cursor-pointer bg-[#f4f6fb]">
                   <SelectValue placeholder="Select strategy" />
                 </SelectTrigger>
                 <SelectContent>
@@ -90,7 +91,7 @@ export function AgentsList() {
             <div className="space-y-2">
               <Label>Risk Level</Label>
               <Select value={riskLevel} onValueChange={(value) => setRiskLevel(value as 'low' | 'medium' | 'high')}>
-                <SelectTrigger className="cursor-pointer">
+                <SelectTrigger className="cursor-pointer bg-[#f4f6fb]">
                   <SelectValue placeholder="Select risk level" />
                 </SelectTrigger>
                 <SelectContent>
@@ -107,6 +108,7 @@ export function AgentsList() {
                 placeholder="0x..."
                 value={reserveAddress}
                 onChange={(e) => setReserveAddress(e.target.value)}
+                className="bg-[#f4f6fb]"
               />
             </div>
           </div>
@@ -117,6 +119,7 @@ export function AgentsList() {
               placeholder="Describe trading personality"
               value={personality}
               onChange={(e) => setPersonality(e.target.value)}
+              className="bg-[#f4f6fb]"
             />
           </div>
 
@@ -139,7 +142,7 @@ export function AgentsList() {
       {isLoading ? (
         <div className="grid gap-4 md:grid-cols-2">
           {Array.from({ length: 2 }).map((_, i) => (
-            <Card key={i} className="rounded-none dark:border-0">
+            <Card key={i}>
               <CardHeader>
                 <Skeleton className="h-6 w-40" />
               </CardHeader>
@@ -158,7 +161,7 @@ export function AgentsList() {
           {agents.map((agent) => (
             <Card
               key={agent.id}
-              className="rounded-none cursor-pointer hover:border-foreground/50 transition-colors"
+              className="cursor-pointer hover:border-foreground/50 transition-colors"
               onClick={() => setSelectedAgentId(agent.id)}
             >
               <CardHeader>

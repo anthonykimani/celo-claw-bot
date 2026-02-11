@@ -144,7 +144,7 @@ export function MarketsList() {
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <Card key={i} className="dark:border-0">
+            <Card key={i}>
               <CardHeader>
                 <div className="flex items-start gap-3">
                   <Skeleton className="h-12 w-12 rounded-full shrink-0" />
@@ -226,7 +226,7 @@ export function MarketsList() {
       </div>
 
       {marketsFilters.showFilters && (
-        <Card className="rounded-none">
+        <Card className="rounded-2xl">
           <CardContent className="p-4 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="space-y-2">
@@ -378,7 +378,7 @@ export function MarketsList() {
                 layoutId={`market-${market.id}`}
               >
                   <Card
-                    className="rounded-none cursor-pointer hover:border-foreground/30 transition-all hover:shadow-sm"
+                    className="cursor-pointer hover:border-foreground/30 transition-all hover:shadow-sm"
                     onClick={() => setSelectedMarketId(market.id)}
                   >
                 <CardHeader className="pb-3">
@@ -419,7 +419,7 @@ export function MarketsList() {
                 </CardHeader>
                 <CardContent className="pt-0 space-y-3">
                   <div className="grid grid-cols-2 gap-2.5">
-                    <div className="p-3.5 rounded-none bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 transition-colors">
+                    <div className="p-3.5 rounded-2xl bg-teal-500 hover:bg-teal-600 transition-colors">
                       <div className="text-xs font-semibold text-white uppercase tracking-wide mb-1.5">
                         YES
                       </div>
@@ -427,7 +427,7 @@ export function MarketsList() {
                         {yesPercent}%
                       </div>
                     </div>
-                    <div className="p-3.5 rounded-none bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 transition-colors">
+                    <div className="p-3.5 rounded-2xl bg-amber-500 hover:bg-amber-600 transition-colors">
                       <div className="text-xs font-semibold text-white uppercase tracking-wide mb-1.5">
                         NO
                       </div>
@@ -455,14 +455,14 @@ export function MarketsList() {
       <div ref={loadMoreRef} className="py-8 flex flex-col items-center justify-center gap-4">
         {isFetchingNextPage && (
           <>
-            <div className="flex items-center gap-2 text-sm text-foreground dark:text-gray-300">
-              <div className="h-4 w-4 border-2 border-foreground dark:border-gray-300 border-t-transparent rounded-full animate-spin" />
+            <div className="flex items-center gap-2 text-sm text-foreground">
+              <div className="h-4 w-4 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
               <span>Loading more markets...</span>
             </div>
             {/* Show skeleton loaders while fetching */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 w-full">
               {Array.from({ length: 3 }).map((_, i) => (
-                <Card key={`loading-${i}`} className="rounded-none dark:border-0">
+                <Card key={`loading-${i}`}>
                   <CardHeader>
                     <div className="flex items-start gap-3">
                       <Skeleton className="h-12 w-12 rounded-full shrink-0" />
@@ -487,4 +487,3 @@ export function MarketsList() {
     </div>
   );
 }
-

@@ -236,17 +236,17 @@ export function CreateOrderForm() {
               <Form autoComplete="off">
                 <div className="grid gap-6 py-4">
                   {(marketErrorMessage || shouldShowValidationErrors) && (
-                    <div className="rounded-lg bg-red-50 dark:bg-red-900/20 p-4">
-                      <div className="text-sm font-semibold text-red-900 dark:text-red-200 mb-2">
+                    <div className="rounded-2xl border border-destructive/30 bg-destructive/10 p-4">
+                      <div className="text-sm font-semibold text-destructive mb-2">
                         Important message:
                       </div>
                       {marketErrorMessage && (
-                        <div className="text-sm text-red-700 dark:text-red-300 mb-2">{marketErrorMessage}</div>
+                        <div className="text-sm text-destructive/90 mb-2">{marketErrorMessage}</div>
                       )}
                       {shouldShowValidationErrors && (
                         <ul className="list-disc list-inside space-y-1">
                           {errorMessages.map((error, index) => (
-                            <li key={index} className="text-sm text-red-700 dark:text-red-300">
+                            <li key={index} className="text-sm text-destructive/90">
                               {error}
                             </li>
                           ))}
@@ -256,7 +256,7 @@ export function CreateOrderForm() {
                   )}
 
                   {market && (
-                    <div className="rounded-lg border p-4 bg-muted/30">
+                    <div className="rounded-2xl border border-border/70 p-4 bg-white">
                       <div className="text-sm font-medium mb-2">Market</div>
                       <div className="text-sm text-muted-foreground">{market.question}</div>
                       <div className="flex gap-2 mt-3">
@@ -392,24 +392,24 @@ export function CreateOrderForm() {
                 </div>
 
                 {isConnected && address && values.side === 'BUY' && (
-                  <div className="space-y-3 p-4 rounded-lg dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                    <div className="text-sm font-medium text-gray-900 dark:text-gray-100">USDC Information</div>
+                  <div className="space-y-3 p-4 rounded-2xl border border-border/70 bg-white">
+                    <div className="text-sm font-medium text-foreground">USDC Information</div>
                     
                     {usdcBalance === undefined || usdcBalance === null ? (
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Loading balance...</div>
+                      <div className="text-sm text-muted-foreground">Loading balance...</div>
                     ) : (
                       <div className="text-sm">
-                        <span className="text-gray-600 dark:text-gray-400">Balance: </span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">{usdcBalance.toFixed(2)} USDC</span>
+                        <span className="text-muted-foreground">Balance: </span>
+                        <span className="font-medium text-foreground">{usdcBalance.toFixed(2)} USDC</span>
                       </div>
                     )}
 
                     {usdcAllowance === undefined || usdcAllowance === null ? (
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Loading allowance...</div>
+                      <div className="text-sm text-muted-foreground">Loading allowance...</div>
                     ) : (
                       <div className="text-sm">
-                        <span className="text-gray-600 dark:text-gray-400">Approved: </span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">{usdcAllowance.toFixed(2)} USDC</span>
+                        <span className="text-muted-foreground">Approved: </span>
+                        <span className="font-medium text-foreground">{usdcAllowance.toFixed(2)} USDC</span>
                       </div>
                     )}
 
@@ -441,7 +441,7 @@ export function CreateOrderForm() {
                             
                             return (
                               <div className="space-y-2 mt-3">
-                                <div className={`text-sm ${hasInsufficientAllowance ? 'text-amber-600 dark:text-amber-400' : 'text-blue-600 dark:text-blue-400'}`}>
+                                <div className={`text-sm ${hasInsufficientAllowance ? 'text-destructive' : 'text-primary'}`}>
                                   {hasInsufficientAllowance ? (
                                     <>
                                       Insufficient USDC spending approval. You have approved {usdcAllowance.toFixed(2)} USDC, but need {requiredAmount.toFixed(2)} USDC.
@@ -457,7 +457,7 @@ export function CreateOrderForm() {
                                   )}
                                 </div>
                                 {gasEstimate && (
-                                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                                  <div className="text-xs text-muted-foreground">
                                     Includes ~${gasFeeUsd.toFixed(4)} gas fee
                                   </div>
                                 )}
@@ -523,11 +523,10 @@ export function CreateOrderForm() {
                     
                     return false;
                   })()}
-                  className={`border-black rounded bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 text-white hover:bg-gray-900 ${
-                    market && (!market.active || market.closed)
-                      ? 'disabled:cursor-not-allowed disabled:opacity-50'
-                      : ''
-                  }`}
+                  className={market && (!market.active || market.closed)
+                    ? 'disabled:cursor-not-allowed disabled:opacity-50'
+                    : undefined
+                  }
                 >
                   {(() => {
                     if (createOrderMutation.isPending) return 'Creating...';
@@ -563,4 +562,3 @@ export function CreateOrderForm() {
     </Dialog>
   );
 }
-

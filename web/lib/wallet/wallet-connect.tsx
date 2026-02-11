@@ -127,7 +127,7 @@ export function WalletConnectButton() {
         onClick={() => setShowModal(true)}
         disabled
         variant="outline"
-        className="rounded-none border-gray-300 dark:border-gray-600 bg-transparent hover:bg-transparent text-gray-900 dark:text-gray-100"
+        className="rounded-full border-border/70 bg-card/80 text-foreground hover:bg-accent/40"
       >
         Connect Wallet
       </Button>
@@ -139,7 +139,7 @@ export function WalletConnectButton() {
       <div className="flex items-center gap-2">
         <Button
           variant="outline"
-          className="rounded-none border-black cursor-default"
+          className="rounded-full border-border/70 bg-card/80 text-foreground cursor-default"
           disabled
         >
           {`${address.slice(0, 6)}...${address.slice(-4)}`}
@@ -147,7 +147,6 @@ export function WalletConnectButton() {
         <Button
           variant="destructive"
           onClick={() => disconnect()}
-          className="rounded-none border-red-600 bg-red-600 hover:bg-red-700 text-white"
         >
           Disconnect
         </Button>
@@ -161,7 +160,7 @@ export function WalletConnectButton() {
         onClick={() => setShowModal(true)}
         disabled={isPending}
         variant="outline"
-        className="rounded-none border-gray-300 dark:border-gray-600 bg-transparent hover:bg-transparent text-gray-900 dark:text-gray-100"
+        className="rounded-full border-border/70 bg-card/80 text-foreground hover:bg-accent/40"
       >
         {isPending ? 'Connecting...' : 'Connect Wallet'}
       </Button>
@@ -232,7 +231,7 @@ export function WalletConnectButton() {
                       variant="outline"
                       onClick={() => handleConnect(connector)}
                       disabled={!isAvailable || isPending}
-                      className="w-full justify-start rounded-none border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 h-auto py-3"
+                      className="w-full justify-start rounded-2xl border-border/70 bg-card/80 hover:bg-accent/30 text-foreground h-auto py-3"
                     >
                       <div className="flex items-center gap-3 w-full">
                         {isMetaMask ? (
@@ -263,12 +262,12 @@ export function WalletConnectButton() {
                             </svg>
                           </div>
                         ) : (
-                          <div className="w-8 h-8 shrink-0 bg-gray-200 rounded" />
+                          <div className="w-8 h-8 shrink-0 bg-muted/70 rounded-lg" />
                         )}
                         <div className="flex-1 text-left">
-                          <div className="font-medium text-gray-900 dark:text-gray-100">{displayName}</div>
+                          <div className="font-medium text-foreground">{displayName}</div>
                           {!isAvailable && (
-                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                            <div className="text-xs text-muted-foreground">
                               {isMetaMask ? 'Install MetaMask' : 'Not available'}
                             </div>
                           )}
@@ -279,7 +278,7 @@ export function WalletConnectButton() {
                 });
             })()}
             {connectors.length === 0 && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-center py-4">
+              <p className="text-sm text-muted-foreground text-center py-4">
                 No wallets available. Please install a wallet extension.
               </p>
             )}
@@ -289,7 +288,7 @@ export function WalletConnectButton() {
             !error.message?.includes('rejected') &&
             !error.message?.includes('reset') &&
             !error.message?.includes('Connection request reset') && (
-            <div className="text-sm text-red-500 mt-2">
+            <div className="text-sm text-destructive mt-2">
               {error.message}
             </div>
           )}

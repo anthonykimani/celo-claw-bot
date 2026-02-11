@@ -102,7 +102,7 @@ export function EventsList() {
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <Card key={i} className="dark:border-0">
+            <Card key={i}>
               <CardHeader>
                 <div className="flex items-start gap-3">
                   <Skeleton className="h-12 w-12 rounded-full shrink-0" />
@@ -179,7 +179,7 @@ export function EventsList() {
       </div>
 
       {eventsFilters.showFilters && (
-        <Card className="rounded-none">
+        <Card className="rounded-2xl">
           <CardContent className="p-4 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -249,7 +249,7 @@ export function EventsList() {
                 layout
               >
                 <Card
-                  className="rounded-none cursor-pointer hover:border-foreground/50 transition-colors"
+                  className="cursor-pointer hover:border-foreground/50 transition-colors"
                   onClick={() => setSelectedEventId(event.id)}
                 >
               <CardHeader>
@@ -292,14 +292,14 @@ export function EventsList() {
       <div ref={loadMoreRef} className="py-8 flex flex-col items-center justify-center gap-4">
         {isFetchingNextPage && (
           <>
-            <div className="flex items-center gap-2 text-sm text-foreground dark:text-gray-300">
-              <div className="h-4 w-4 border-2 border-foreground dark:border-gray-300 border-t-transparent rounded-full animate-spin" />
+            <div className="flex items-center gap-2 text-sm text-foreground">
+              <div className="h-4 w-4 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
               <span>Loading more events...</span>
             </div>
             {/* Show skeleton loaders while fetching */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 w-full">
               {Array.from({ length: 3 }).map((_, i) => (
-                <Card key={`loading-${i}`} className="dark:border-0">
+                <Card key={`loading-${i}`}>
                   <CardHeader>
                     <div className="flex items-start gap-3">
                       <Skeleton className="h-12 w-12 rounded-full shrink-0" />
@@ -321,4 +321,3 @@ export function EventsList() {
     </div>
   );
 }
-

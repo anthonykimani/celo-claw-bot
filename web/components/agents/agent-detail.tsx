@@ -31,7 +31,7 @@ export function AgentDetail() {
     return (
       <div className="space-y-4">
         <Skeleton className="h-10 w-32" />
-        <Card className="rounded-none">
+        <Card className="rounded-2xl">
           <CardHeader>
             <Skeleton className="h-6 w-40" />
           </CardHeader>
@@ -66,7 +66,7 @@ export function AgentDetail() {
         </Button>
       </div>
 
-      <Card className="rounded-none">
+      <Card className="rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg">Performance Snapshot</CardTitle>
         </CardHeader>
@@ -108,7 +108,7 @@ export function AgentDetail() {
         </CardContent>
       </Card>
 
-      <Card className="rounded-none">
+      <Card className="rounded-2xl">
         <CardHeader>
           <CardTitle className="text-lg">Reserve Events</CardTitle>
         </CardHeader>

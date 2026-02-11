@@ -124,7 +124,7 @@ export function OrdersList() {
         </div>
         <div className="grid gap-4">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Card key={i} className="rounded-none dark:border-0">
+            <Card key={i}>
               <CardContent className="p-4">
                 <Skeleton className="h-20 w-full" />
               </CardContent>
@@ -176,7 +176,7 @@ export function OrdersList() {
       </div>
 
       {showFilters && (
-        <Card className="rounded-none">
+        <Card className="rounded-2xl">
           <CardContent className="p-4 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="space-y-2">
@@ -279,7 +279,7 @@ export function OrdersList() {
                 layout
               >
                 <Card
-                  className="cursor-pointer hover:border-foreground/50 transition-colors rounded-none"
+                  className="cursor-pointer hover:border-foreground/50 transition-colors"
                   onClick={() => setSelectedOrderId(order.id)}
                 >
                   <CardContent className="p-4">
@@ -294,7 +294,7 @@ export function OrdersList() {
                             variant={statusColors[order.status] || 'secondary'}
                             className={
                               order.status === 'FAILED'
-                                ? 'bg-red-600 text-white font-bold text-sm px-3 py-1'
+                                ? 'bg-destructive text-destructive-foreground font-bold text-sm px-3 py-1'
                                 : ''
                             }
                           >
@@ -346,7 +346,6 @@ export function OrdersList() {
                             size="sm"
                             onClick={() => handleCancel(order.id)}
                             disabled={cancelOrderMutation.isPending}
-                            className="bg-red-600 hover:bg-red-700 text-white"
                           >
                             Cancel
                           </Button>
@@ -365,14 +364,14 @@ export function OrdersList() {
       <div ref={loadMoreRef} className="py-8 flex flex-col items-center justify-center gap-4">
         {isFetchingNextPage && (
           <>
-            <div className="flex items-center gap-2 text-sm text-foreground dark:text-gray-300">
-              <div className="h-4 w-4 border-2 border-foreground dark:border-gray-300 border-t-transparent rounded-full animate-spin" />
+            <div className="flex items-center gap-2 text-sm text-foreground">
+              <div className="h-4 w-4 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
               <span>Loading more orders...</span>
             </div>
             {/* Show skeleton loaders while fetching */}
             <div className="grid gap-4 w-full">
               {Array.from({ length: 3 }).map((_, i) => (
-                <Card key={`loading-${i}`} className="rounded-none dark:border-0">
+                <Card key={`loading-${i}`}>
                   <CardContent className="p-4">
                     <Skeleton className="h-20 w-full" />
                   </CardContent>
@@ -385,4 +384,3 @@ export function OrdersList() {
     </div>
   );
 }
-

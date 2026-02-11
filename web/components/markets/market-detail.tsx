@@ -23,7 +23,7 @@ export function MarketDetail() {
     return (
       <div className="space-y-4">
         <Skeleton className="h-10 w-32" />
-        <Card className="dark:border-0">
+        <Card>
           <CardHeader>
             <Skeleton className="h-8 w-3/4" />
           </CardHeader>
@@ -62,7 +62,7 @@ export function MarketDetail() {
         Back to Markets
       </Button>
 
-      <Card className="rounded-none overflow-hidden">
+      <Card className="rounded-2xl overflow-hidden">
         <CardHeader className="pb-4">
           <div className="flex items-start gap-3">
             {market.image && (
@@ -113,7 +113,7 @@ export function MarketDetail() {
                   price: yesPrice.toFixed(4),
                 });
               }}
-              className="p-8 rounded-none bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 transition-colors text-left cursor-pointer"
+              className="p-8 rounded-2xl bg-teal-500 hover:bg-teal-600 transition-colors text-left cursor-pointer shadow-[0_20px_40px_rgba(13,148,136,0.25)]"
             >
               <div className="text-sm font-semibold text-white uppercase tracking-wide mb-4">
                 YES
@@ -136,7 +136,7 @@ export function MarketDetail() {
                   price: noPrice.toFixed(4),
                 });
               }}
-              className="p-8 rounded-none bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 transition-colors text-left cursor-pointer"
+              className="p-8 rounded-2xl bg-amber-500 hover:bg-amber-600 transition-colors text-left cursor-pointer shadow-[0_20px_40px_rgba(217,119,6,0.25)]"
             >
               <div className="text-sm font-semibold text-white uppercase tracking-wide mb-4">
                 NO
@@ -199,4 +199,3 @@ export function MarketDetail() {
     </div>
   );
 }
-

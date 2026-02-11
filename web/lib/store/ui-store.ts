@@ -74,7 +74,7 @@ export const useUIStore = create<UIState>()(
       eventsPage: 1,
       marketsPage: 1,
       ordersPage: 1,
-      theme: 'dark',
+      theme: 'light',
       eventsFilters: {
         search: '',
         activeFilter: undefined,

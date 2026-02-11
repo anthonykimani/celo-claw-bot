@@ -23,7 +23,7 @@ export function EventDetail() {
     return (
       <div className="space-y-4">
         <Skeleton className="h-10 w-32" />
-        <Card className="dark:border-0">
+        <Card>
           <CardHeader>
             <Skeleton className="h-8 w-3/4" />
           </CardHeader>
@@ -57,7 +57,7 @@ export function EventDetail() {
         Back to Events
       </Button>
 
-      <Card className="rounded-none">
+      <Card className="rounded-2xl">
         <CardHeader>
           <div className="flex items-start gap-3">
             {event.image && (
@@ -136,7 +136,7 @@ export function EventDetail() {
                   return (
                     <div
                       key={index}
-                      className="rounded-none border border-border/60 bg-muted/30 dark:bg-muted/20 overflow-hidden"
+                      className="rounded-2xl border border-border/70 bg-white overflow-hidden"
                     >
                       <pre className="p-4 m-0 font-mono text-xs leading-relaxed overflow-x-auto">
                         <code className="text-foreground">{jsonString}</code>
@@ -152,4 +152,3 @@ export function EventDetail() {
     </div>
   );
 }
-

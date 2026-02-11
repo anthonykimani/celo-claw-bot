@@ -35,7 +35,7 @@ export function OrderDetail() {
     return (
       <div className="space-y-4">
         <Skeleton className="h-10 w-32" />
-        <Card className="rounded-none dark:border-0">
+        <Card>
           <CardHeader>
             <div className="flex justify-between items-center">
               <Skeleton className="h-8 w-32" />
@@ -85,11 +85,11 @@ export function OrderDetail() {
       </Button>
 
       {order.status === 'FAILED' && (
-        <div className="bg-red-900/20 border-none dark:border-2 dark:border-red-400 rounded-none p-4 mb-4">
+        <div className="bg-destructive/10 border border-destructive/30 rounded-2xl p-4 mb-4">
           <div className="flex items-start gap-3">
-            <XCircle className="h-6 w-6 text-red-700 dark:text-red-400 shrink-0 mt-0.5" />
+            <XCircle className="h-6 w-6 text-destructive shrink-0 mt-0.5" />
             <div className="flex-1">
-              <div className="text-lg font-bold text-red-900 dark:text-red-100 mb-2">
+              <div className="text-lg font-bold text-destructive mb-2">
                 {order.failureReason
                   ? normalizeError(order.failureReason).title || 'Order Failed'
                   : 'Order Failed'}
@@ -98,16 +98,16 @@ export function OrderDetail() {
                 const normalized = normalizeError(order.failureReason);
                 return (
                   <div className="space-y-2">
-                    <div className="text-sm text-red-900 dark:text-red-300 font-medium">
+                    <div className="text-sm text-destructive/90 font-medium">
                       {normalized.message}
                     </div>
                     {normalized.details && (
-                      <div className="text-sm text-red-800 dark:text-red-400 mt-2 p-3 bg-white dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded">
+                      <div className="text-sm text-destructive/90 mt-2 p-3 bg-white border border-destructive/30 rounded-xl">
                         {normalized.details}
                       </div>
                     )}
                     {normalized.action && (
-                      <div className="text-sm text-red-800 dark:text-red-400 font-semibold mt-2">
+                      <div className="text-sm text-destructive/90 font-semibold mt-2">
                         {normalized.action}
                       </div>
                     )}
@@ -119,7 +119,7 @@ export function OrderDetail() {
         </div>
       )}
 
-      <Card className={`rounded-none `}>
+      <Card className="rounded-2xl">
         <CardHeader>
           <div className="flex justify-between items-center">
             <CardTitle>Order #{order.id}</CardTitle>
@@ -127,7 +127,7 @@ export function OrderDetail() {
               variant={statusColors[order.status] || 'secondary'}
               className={
                 order.status === 'FAILED'
-                  ? 'bg-red-600 text-white text-base px-4 py-2 font-bold'
+                  ? 'bg-destructive text-destructive-foreground text-base px-4 py-2 font-bold'
                   : ''
               }
             >
@@ -248,15 +248,15 @@ export function OrderDetail() {
           {order.failureReason && order.status !== 'FAILED' && (() => {
             const normalized = normalizeError(order.failureReason);
             return (
-              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-none p-3">
-                <div className="text-sm font-semibold text-red-900 dark:text-red-100 mb-1">
+              <div className="bg-destructive/10 border border-destructive/30 rounded-2xl p-3">
+                <div className="text-sm font-semibold text-destructive mb-1">
                   {normalized.title || 'Failure Reason'}
                 </div>
-                <div className="text-sm text-red-700 dark:text-red-300">
+                <div className="text-sm text-destructive/90">
                   {normalized.message}
                 </div>
                 {normalized.details && (
-                  <div className="text-xs text-red-600 dark:text-red-400 mt-2">
+                  <div className="text-xs text-destructive/80 mt-2">
                     {normalized.details}
                   </div>
                 )}
@@ -270,7 +270,6 @@ export function OrderDetail() {
                 variant="destructive"
                 onClick={handleCancel}
                 disabled={cancelOrderMutation.isPending}
-                className="bg-red-600 hover:bg-red-700 text-white"
               >
                 {cancelOrderMutation.isPending ? 'Cancelling...' : 'Cancel Order'}
               </Button>
@@ -281,4 +280,3 @@ export function OrderDetail() {
     </div>
   );
 }
-

@@ -40,13 +40,13 @@ const ToggleButton = React.forwardRef<HTMLButtonElement, ToggleButtonProps>(
         type="button"
         onClick={handleClick}
         className={cn(
-          "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-all duration-200 ease-in-out ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-              value === undefined
-                ? "border border-input bg-background hover:bg-accent hover:text-accent-foreground"
-                : value === true
-                ? "bg-green-500 text-white hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700"
-                : "bg-red-500 text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700",
-          "h-10 px-4 py-2",
+          "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium cursor-pointer transition-all duration-200 ease-in-out ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 shadow-[0_10px_20px_rgba(15,23,42,0.1)]",
+          value === undefined
+            ? "border border-border/70 bg-white text-foreground hover:bg-accent/40"
+            : value === true
+            ? "bg-emerald-500 text-white hover:bg-emerald-600"
+            : "bg-rose-500 text-white hover:bg-rose-600",
+          "h-10 px-4",
           className
         )}
         {...props}
@@ -59,4 +59,3 @@ const ToggleButton = React.forwardRef<HTMLButtonElement, ToggleButtonProps>(
 ToggleButton.displayName = "ToggleButton"
 
 export { ToggleButton }
-
